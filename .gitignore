@@ -131,3 +131,4 @@ dmypy.json
 # Local resources directories
 .vscode
 .assets
+.generated
