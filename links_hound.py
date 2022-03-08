@@ -1,5 +1,4 @@
 import discord
-import asyncio
 import ENV.tokens
 from url_finder import get_links
 
