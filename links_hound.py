@@ -26,4 +26,7 @@ async def on_message(message):
     if message.content.startswith('!List'):
         await scrap(message, client)
 
+    if message.content.startswith('!ListChan'):
+        await scrap(message, client, True)
+
 client.run(ENV.tokens.BOT_TOKEN)
