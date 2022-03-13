@@ -1,5 +1,7 @@
+from operator import truediv
 import discord
 import ENV.tokens
+from src.output_generator import generate_output
 from src.links_scrapper import scrap
 
 
@@ -23,10 +25,13 @@ async def on_message(message):
         print('Logging out...')
         await client.close()
 
-    if message.content.startswith('!List'):
-        await scrap(message, client)
+    if message.content.startswith('!GetLinks'):
+        retrieved_links = await scrap(message, client)
+        args = message.content.split(' ')
+        display_in_channel = ('--channel' in args)
+        display_as_list = ('--list' in args)
+        display_by_author = ('--list' in args) and ('--byauthor' in args)
+        await generate_output(message, retrieved_links, display_in_channel, display_as_list, display_by_author)
 
-    if message.content.startswith('!ListChan'):
-        await scrap(message, client, True)
 
 client.run(ENV.tokens.BOT_TOKEN)
