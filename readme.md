@@ -23,6 +23,6 @@ On Windows, it's : `py -3 .\links_hound.py`.
 
 ## Commands :
 - `!GetLinks` To retrieved all the links in a single .md file in private message. You can add the following attributes :
-- `--channel` : to get the bot response in an embedded code file on the channel, instead of having it in private message.
-- `--list` : to get an ordered list by date, and by authors.
-- `--list --byauthor` : to get only a ordered list of links by authors.
+    - `--channel` : to get the bot response in an embedded code file on the channel, instead of having it in private message.
+    - `--list` : to get an ordered list ordered by date, and then by author.
+    - `--list --byauthor` : to get a list of links, grouped by author only.
