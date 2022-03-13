@@ -15,8 +15,14 @@ In the meantime, feel free to hack it and taylor it for your own use!
 
 ## How to use?
 1. Run the file `links_hound.py` in a terminal to start the bot. You should see a message "We have logged in as *nickname*", and the bot connected on your discord server.
-2. Type the command `!List` on any channel to get all the links. The bot will send you a file containing the links and will save a local copy in the `.generated/` directory.
+2. Type the command `!GetLinks` on any channel to get all the links. The bot will send you a file containing the links and will save a local copy in the `.generated/` directory.
 3. You can make the bot soft-logout and terminate by sending the command `!Stop` in private or in any channel. Or just kill the terminal where it's running.
 
 On Linux, the run command is : `python3 links_hound.py`.
 On Windows, it's : `py -3 .\links_hound.py`.
+
+## Commands :
+- `!GetLinks` To retrieved all the links in a single .md file in private message. You can add the following attributes :
+- `--channel` : to get the bot response in an embedded code file on the channel, instead of having it in private message.
+- `--list` : to get an ordered list by date, and by authors.
+- `--list --byauthor` : to get only a ordered list of links by authors.
