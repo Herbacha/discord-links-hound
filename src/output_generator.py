@@ -1,20 +1,26 @@
 import discord
+from src.generator_formats.formats import OutputFormat
+from src.generator_formats.generate_list_by_date import generate_list_by_date
+from src.generator_formats.generate_list_by_author import generate_list_by_author
+from src.generator_formats.generate_table import generate_table
 
 
-def generate_contents(linkdata_list):
+def generate_contents(linkdata_list, output_format=OutputFormat.TABLE):
     if(len(linkdata_list) > 0):
-        output_lines = []
-        for linkdata in linkdata_list:
-            output_lines.append(
-                f'| {linkdata.url} | {linkdata.author.display_name} | {linkdata.date.strftime("%m/%d/%Y - %H:%M")} |')
-        return '| Link | Posted by | Date |\r| ---- | --------- | ---- |\r' + \
-            '\r'.join(output_lines)
+        if(output_format == OutputFormat.LISTBYDATE):
+            return generate_list_by_date(linkdata_list)
+        elif(output_format == OutputFormat.LISTBYAUTHOR):
+            return generate_list_by_author(linkdata_list)
+        else:
+            return generate_table(linkdata_list)
     else:
         return None
 
 
-async def generate_list(context, linkdata_list, display_in_channel=False):
-    contents = generate_contents(linkdata_list)
+async def generate_output(context, linkdata_list, display_in_channel=False, display_as_list=False, display_by_author=False):
+
+    output_format = OutputFormat.LISTBYAUTHOR if display_by_author else OutputFormat.LISTBYDATE if display_as_list else OutputFormat.TABLE
+    contents = generate_contents(linkdata_list, output_format)
     result_message = 'No link found.'
     if(contents != None):
         result_message = f'Found: {str(len(linkdata_list))} links.\r'
@@ -26,7 +32,7 @@ async def generate_list(context, linkdata_list, display_in_channel=False):
 
 
 async def generate_embedded_code(contents):
-    return f'```md\r {contents}\r```'
+    return f'```md\r{contents}\r```'
 
 
 async def generate_file(context, contents):
